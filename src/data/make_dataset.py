@@ -1,30 +1,36 @@
-# -*- coding: utf-8 -*-
-import click
-import logging
-from pathlib import Path
-from dotenv import find_dotenv, load_dotenv
+import glob
+import os
 
-
-@click.command()
-@click.argument('input_filepath', type=click.Path(exists=True))
-@click.argument('output_filepath', type=click.Path())
-def main(input_filepath, output_filepath):
-    """ Runs data processing scripts to turn raw data from (../raw) into
-        cleaned data ready to be analyzed (saved in ../processed).
+def merge_text_files(input_dir, output_file):
     """
-    logger = logging.getLogger(__name__)
-    logger.info('making final data set from raw data')
+    Merges text files from a specified directory into a single output file.
 
+    Args:
+        input_dir (str): Path to the directory containing text files.
+        output_file (str): Path to the output file where the merged text will be stored.
+    """
+    # Use os.path.join to ensure the path is constructed correctly for any OS
+    paths = glob.glob(os.path.join(input_dir, "*.txt"))
+    
+    # Sort the file paths for consistent order (useful in many contexts)
+    paths = sorted(paths)
+    
+    print(f"Merging {len(paths)} files from {input_dir} into {output_file}...")
+    
+    with open(output_file, "w", encoding='ISO-8859-1') as outfile:
+        for path in paths:
+            with open(path, "r", encoding='ISO-8859-1') as infile:
+                for line in infile:
+                    stripped_line = line.strip()
+                    if stripped_line:  # Avoid writing empty lines
+                        print(stripped_line, file=outfile)
+    
+    print("Corpus merged successfully.")
+
+def main():
+    drive_path = '../../data/raw/Dune_texts'
+    dataset_file = "../../data/processed/dune_full_corpus.txt"  # Save in processed directory
+    merge_text_files(drive_path, dataset_file)
 
 if __name__ == '__main__':
-    log_fmt = '%(asctime)s - %(name)s - %(levelname)s - %(message)s'
-    logging.basicConfig(level=logging.INFO, format=log_fmt)
-
-    # not used in this stub but often useful for finding various files
-    project_dir = Path(__file__).resolve().parents[2]
-
-    # find .env automagically by walking up directories until it's found, then
-    # load up the .env entries as environment variables
-    load_dotenv(find_dotenv())
-
     main()
