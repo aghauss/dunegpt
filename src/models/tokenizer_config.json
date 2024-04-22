@@ -1,0 +1,14 @@
+{
+    "tokenizer_config": {
+      "vocab_size": 5000,
+      "special_tokens": ["[UNK]", "[PAD]"]
+    },
+    "dataset_config": {
+      "file_path": "../../data/processed/dune_full_corpus.txt",
+      "encoding": "ISO-8859-1"
+    },
+    "save_config": {
+      "tokenizer_path": "../../models/dune_tokenizer.json"
+    }
+  }
+  
