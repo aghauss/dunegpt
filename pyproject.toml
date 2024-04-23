@@ -6,8 +6,8 @@ authors = ["Arash Ghauss <arash.ghauss@gmail.com>"]
 readme = "README.md"
 
 [tool.poetry.dependencies]
-python = "~3.11"
-cookiecutter = "^2.6.0"
+python >= "3.8.0,<3.12"
+ipykernel = "^6.29.4"
 
 
 [build-system]

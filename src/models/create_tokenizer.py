@@ -17,6 +17,9 @@ def load_text_dataset(file_path , encoding):
         raise Exception(f"An unexpected error occurred: {e}")
 
 
+
+
+
 class TextTokenizer:
     def __init__(self, vocab_size=5000, special_tokens=None):
         if special_tokens is None:
@@ -40,6 +43,19 @@ class TextTokenizer:
     def save(self, path="tokenizer.json"):
         """Save the trained tokenizer to a file."""
         self.tokenizer.save(path)
+    
+    def save(self, path):
+        """ Save the trained tokenizer using the Hugging Face transformers format. """
+        # Save using tokenizers library methods to ensure all parts are there
+        tokenizer_model_path = path + "/tokenizer.json"
+        self.tokenizer.save(tokenizer_model_path)
+        
+        # Load the tokenizer we just saved
+        fast_tokenizer = PreTrainedTokenizerFast(tokenizer_file=tokenizer_model_path)
+        # Add any special tokens that are necessary
+        fast_tokenizer.add_special_tokens({"pad_token": "[PAD]"})
+        # Save the tokenizer in the format expected by Hugging Face transformers
+        fast_tokenizer.save_pretrained(path)
 
     def load_fast_tokenizer(self, path="tokenizer.json"):
         """Load a fast tokenizer."""
@@ -59,7 +75,8 @@ def main():
     tokenizer.train(dataset_dict)
 
     # Save tokenizer
-    tokenizer.save(path=config['save_config']['tokenizer_path'])
+    tokenizer_dir = config['save_config']['tokenizer_path']  
+    tokenizer.save(tokenizer_dir)
 
 
 if __name__ == "__main__":
