@@ -10,63 +10,124 @@ Dunegpt is a project that trains a GPT2-model from scratch utilizing the books o
 1. Clone the repository:
    ```zsh
    git clone https://github.com/aghauss/dunegpt.git
-
-2. Clone the repository:
+2. Navigate to the project directory:
    ```zsh
-   pip install requirements.txt
+   cd dunegpt
+3. Create a virtual enviroment and activate it (for macOS and Linux)
+    ```zsh
+    python -m venv dunegpt-env
+    source venv/bin/activate
+4. Install requirements:
+   ```zsh
+   pip install -r requirements.txt
+5. Make corpus for training available:
+     - Move the corpus you want to use (e.g. the Dune series) to the data/raw folder. Each book should be available as .txt file.
+     - The corpus will be automatically merged by a script.
 
 
-3. Prepare 
+## Usage
+
+Once the environment is set up and the corpus is available, you can use the provided Makefile to execute the workflow. Here are the main targets:
+
+
+1. **Make Dataset (Merge Raw Files)**:
+   - This target merges the raw files in the `data/raw` directory to create the dataset.
+     ```zsh
+     make data
+     ```
+
+2. **Create Tokenizer**:
+   - This target creates the tokenizer based on the corpus.
+     ```zsh
+     make tokenizer
+     ```
+
+3. **Apply Tokenizer**:
+   - This target applies the tokenizer to the full corpus.
+     ```zsh
+     make apply_tokenizer
+     ```
+
+4. **Train Model**:
+   - This target trains the GPT2-model from scratch using the corpus. Sufficient GPU memory should be available to perfomr this step!
+     ```zsh
+     make train
+     ```
+
+5. **Inference**:
+   - This target runs the chatbot using the trained model.
+     ```zsh
+     make inference
+     ```
+
+6. **Clean**:
+   - This target cleans up the processed data, tokenizer, and trained model files.
+     ```zsh
+     make clean
+     ```
+
+These commands can be executed in your terminal by running `make <target>`, where `<target>` is one of the targets listed above. Ensure you have the necessary data files in the `data/raw` directory before running the `make data` target.
+
+
 
 
 Project Organization
 ------------
 
-    ├── LICENSE
-    ├── Makefile           <- Makefile with commands like `make data` or `make train`
-    ├── README.md          <- The top-level README for developers using this project.
-    ├── data
-    │   ├── external       <- Data from third party sources.
-    │   ├── interim        <- Intermediate data that has been transformed.
-    │   ├── processed      <- The final, canonical data sets for modeling.
-    │   └── raw            <- The original, immutable data dump.
+
+    ├── data               <- Data directory 
+    │   ├── processed      <- Contains the corpus as one .txt file and the fully tokenized corpus 
+    │   └── raw            <- Corpus needs to be placed here.
     │
-    ├── docs               <- A default Sphinx project; see sphinx-doc.org for details
+    ├── models             <- Contains the trained tokenizer and the GPT2 model after training.
     │
-    ├── models             <- Trained and serialized models, model predictions, or model summaries
     │
-    ├── notebooks          <- Jupyter notebooks. Naming convention is a number (for ordering),
-    │                         the creator's initials, and a short `-` delimited description, e.g.
-    │                         `1.0-jqp-initial-data-exploration`.
     │
-    ├── references         <- Data dictionaries, manuals, and all other explanatory materials.
-    │
-    ├── reports            <- Generated analysis as HTML, PDF, LaTeX, etc.
-    │   └── figures        <- Generated graphics and figures to be used in reporting
-    │
-    ├── requirements.txt   <- The requirements file for reproducing the analysis environment, e.g.
-    │                         generated with `pip freeze > requirements.txt`
-    │
-    ├── setup.py           <- makes project pip installable (pip install -e .) so src can be imported
     ├── src                <- Source code for use in this project.
     │   ├── __init__.py    <- Makes src a Python module
     │   │
-    │   ├── data           <- Scripts to download or generate data
+    │   ├── data           <- Scripts to merge and harmonize several txt files (the individual books) 
     │   │   └── make_dataset.py
     │   │
-    │   ├── features       <- Scripts to turn raw data into features for modeling
-    │   │   └── build_features.py
-    │   │
-    │   ├── models         <- Scripts to train models and then use trained models to make
+    │   ├── models         <- Scripts to train tokenizer and GPT2 model.
     │   │   │                 predictions
-    │   │   ├── predict_model.py
-    │   │   └── train_model.py
-    │   │
-    │   └── visualization  <- Scripts to create exploratory and results oriented visualizations
-    │       └── visualize.py
-    │
-    └── tox.ini            <- tox file with settings for running tox; see tox.readthedocs.io
+    │   │   ├── create_tokenizer.py
+    │   │   └── dune_chat.py
+    │   │   └── model_trainer.py
+    │   │   └── tokenize_corpus.py
+    │   │   └── tokenizer_config.json
+    ├── Makefile           <- Makefile to replicate entire workflow.
+    ├── README.md          <- The file you are currently reading.
+    ├── requirements.txt   <- The requirements file for reproducing the environment
 
 
---------
+## Dependencies
 
+- [accelerate](https://pypi.org/project/accelerate/) (version 0.29.3)
+  - License: MIT License
+
+- [ipykernel](https://pypi.org/project/ipykernel/) (version 6.29.4)
+  - License: BSD 3-Clause License
+
+- [ipython](https://pypi.org/project/ipython/) (version 8.23.0)
+  - License: BSD 3-Clause License
+
+- [pandas](https://pypi.org/project/pandas/) (version 2.2.2)
+  - License: BSD 3-Clause License
+
+- [tensorflow](https://pypi.org/project/tensorflow/) (version 2.16.1)
+  - License: Apache License 2.0
+
+- [tokenizers](https://pypi.org/project/tokenizers/) (version 0.19.1)
+  - License: MIT License
+
+- [torch](https://pypi.org/project/torch/) (version 2.2.2)
+  - License: BSD 3-Clause License
+
+- [transformers](https://pypi.org/project/transformers/) (version 4.40.0)
+  - License: Apache License 2.0
+
+
+## License
+
+This project is licensed under the [MIT License](https://opensource.org/licenses/MIT).
