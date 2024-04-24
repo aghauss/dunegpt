@@ -1,7 +1,23 @@
-dunegpt
-==============================
+# Dunegpt
+Interactive GPT2-based Chatbot for Dune fans to ask questions about the franchise.
 
-GPT based on Dune Books.
+## Project Description
+
+Dunegpt is a project that trains a GPT2-model from scratch utilizing the books of the Dune Franchise of Frank Herbert's Dune books. The project aims to enable fans to ask questions about the franchise, ask for stories in the style of Dune and overall enhance the dune experience.
+
+## Installation
+
+1. Clone the repository:
+   ```zsh
+   git clone https://github.com/aghauss/dunegpt.git
+
+2. Clone the repository:
+   ```zsh
+   pip install requirements.txt
+
+
+3. Prepare 
+
 
 Project Organization
 ------------
