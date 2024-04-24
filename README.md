@@ -1,9 +1,43 @@
-# Dunegpt
+# DuneGPT
 Interactive GPT2-based Chatbot for Dune fans to ask questions about the franchise.
 
 ## Project Description
 
-Dunegpt is a project that trains a GPT2-model from scratch utilizing the books of the Dune Franchise of Frank Herbert's Dune books. The project aims to enable fans to ask questions about the franchise, ask for stories in the style of Dune and overall enhance the dune experience.
+DuneGPT is a project that trains a GPT2-model from scratch utilizing the books of the Dune Franchise of Frank Herbert's Dune books. The project aims to enable fans to ask questions about the franchise, ask for stories in the style of Dune and overall enhance the dune experience.
+
+Project Organization
+------------
+
+
+    ├── data               <- Placeholder data directory 
+    │   ├── processed      <- Contains the corpus as one .txt file and the fully tokenized corpus 
+    │   └── raw            <- Corpus needs to be placed here.
+    │
+    ├── models             <- Contains the trained tokenizer and the GPT2 model after training.
+    │
+    │
+    │
+    ├── src                <- Source code for use in this project.
+    │   ├── __init__.py    <- Makes src a Python module
+    │   │
+    │   ├── data           <- Scripts to merge and harmonize several txt files (the individual books) 
+    │   │   └── make_dataset.py
+    │   │
+    │   ├── models         <- Scripts to train tokenizer and GPT2 model.
+    │   │   │                 predictions
+    │   │   ├── create_tokenizer.py
+    │   │   └── dune_chat.py
+    │   │   └── model_trainer.py
+    │   │   └── tokenize_corpus.py
+    │   │   └── tokenizer_config.json
+    ├── Makefile           <- Makefile to replicate entire workflow.
+    ├── README.md          <- The file you are currently reading.
+    ├── requirements.txt   <- The requirements file for reproducing the environment
+
+## Prerequisites
+
+- Python 3.10 or newer
+
 
 ## Installation
 
@@ -49,7 +83,7 @@ Once the environment is set up and the corpus is available, you can use the prov
      ```
 
 4. **Train Model**:
-   - This target trains the GPT2-model from scratch using the corpus. Sufficient GPU memory should be available to perfomr this step!
+   - This target trains the GPT2-model from scratch using the corpus. Sufficient GPU memory should be available to perform this step!
      ```zsh
      make train
      ```
@@ -67,39 +101,6 @@ Once the environment is set up and the corpus is available, you can use the prov
      ```
 
 These commands can be executed in your terminal by running `make <target>`, where `<target>` is one of the targets listed above. Ensure you have the necessary data files in the `data/raw` directory before running the `make data` target.
-
-
-
-
-Project Organization
-------------
-
-
-    ├── data               <- Placeholder data directory 
-    │   ├── processed      <- Contains the corpus as one .txt file and the fully tokenized corpus 
-    │   └── raw            <- Corpus needs to be placed here.
-    │
-    ├── models             <- Contains the trained tokenizer and the GPT2 model after training.
-    │
-    │
-    │
-    ├── src                <- Source code for use in this project.
-    │   ├── __init__.py    <- Makes src a Python module
-    │   │
-    │   ├── data           <- Scripts to merge and harmonize several txt files (the individual books) 
-    │   │   └── make_dataset.py
-    │   │
-    │   ├── models         <- Scripts to train tokenizer and GPT2 model.
-    │   │   │                 predictions
-    │   │   ├── create_tokenizer.py
-    │   │   └── dune_chat.py
-    │   │   └── model_trainer.py
-    │   │   └── tokenize_corpus.py
-    │   │   └── tokenizer_config.json
-    ├── Makefile           <- Makefile to replicate entire workflow.
-    ├── README.md          <- The file you are currently reading.
-    ├── requirements.txt   <- The requirements file for reproducing the environment
-
 
 ## Dependencies
 
