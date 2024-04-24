@@ -56,8 +56,11 @@ target/
 # Jupyter NB Checkpoints
 .ipynb_checkpoints/
 
-# exclude data from source control by default
-data/*
+# Ignore all files in the data directory and its subdirectories
+data/**/*
+
+# Except allow tracking the directories themselves
+!data/
 
 
 # Mac OS-specific storage files

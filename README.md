@@ -75,7 +75,7 @@ Project Organization
 ------------
 
 
-    ├── data               <- Data directory 
+    ├── data               <- Placeholder data directory 
     │   ├── processed      <- Contains the corpus as one .txt file and the fully tokenized corpus 
     │   └── raw            <- Corpus needs to be placed here.
     │
