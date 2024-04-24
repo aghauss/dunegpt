@@ -16,7 +16,7 @@ Dunegpt is a project that trains a GPT2-model from scratch utilizing the books o
 3. Create a virtual enviroment and activate it (for macOS and Linux)
     ```zsh
     python -m venv dunegpt-env
-    source venv/bin/activate
+    source dunegpt-env/bin/activate
 4. Install requirements:
    ```zsh
    pip install -r requirements.txt
